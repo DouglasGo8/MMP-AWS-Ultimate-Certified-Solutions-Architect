@@ -132,3 +132,31 @@
   3. Scheduled Actions, Antecipate a scaling based on known usage patterns, eg. increase the min capacity to 10 at 5 pm on Friday
 
   4. ASG Cooldown Rules ![ASGCooldown](./assets/images/ASG_Cooldown.png)
+
+## RDS Aurora and ElastiCache
+
+- Relation Data base Services using SQL composed by *Postgres, MySQL, MariaDB, Oracle, SQL Server Aurora AWS*
+- RDS is a managed service
+- Can't access by SSH int your instances
+- Avoid scaling your database storage
+- Can create up to 5 Read Replicas, replication is async so reads can eventually fail over consistency when look to updated data
+- There's a network cost when data goes from one AZ (east-weast) to another
+- RDS Encryption works with Rest and AWS KMS - AES-256 encryption
+- RDS are usually deployed within a private subnet, not a public one
+- MySQL and Postgresql needs a token (exp. 15min) to connect in db
+- Amazon Aurora not open sourced, both MySQL and Postgres are supported as Aurora DB (that means your drivers will work as Aurora)
+- Elastic Cache is same way of RDS and is manged by Redis or Memcache
+- Caches are in-memory databases with really high performance and low latency
+- To Complex structures or backup options Redis is a best option
+
+- FTP: 21
+- SSH: 22
+- SFTP: 22 (same as SSH)
+- HTTP: 80
+- HTTPS: 443 
+- PostgreSQL: 5432
+- MySQL: 3306
+- Oracle RDS: 1521
+- MSSQL Server: 1433
+- MariaDB: 3306 (same as MySQL)
+- Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
