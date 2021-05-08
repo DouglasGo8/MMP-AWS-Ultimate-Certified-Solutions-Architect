@@ -153,10 +153,21 @@
 - SSH: 22
 - SFTP: 22 (same as SSH)
 - HTTP: 80
-- HTTPS: 443 
+- HTTPS: 443
 - PostgreSQL: 5432
 - MySQL: 3306
 - Oracle RDS: 1521
 - MSSQL Server: 1433
 - MariaDB: 3306 (same as MySQL)
 - Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
+
+## Route 53
+
+- Is a managed DNS
+- DNS is a collection of rules and records which helps clients understand how to reach a server through its domain name
+
+- Most common in AWS are *A: hostname to IPv4* - *AAAA: hsostname to IPv6* - *CNAME: hostname to hostname* and *Alias: hostname to AWS resources*
+- A preview ![Route 53](./assets/images/route53.png)
+- Advanced features are Load Balancing (throuhg DNS - also called client load balacing), Health checks (although limited) and Routing policy as simple, failover, geolocation, latency, weighted and multi value
+- CNAME points a hostname to any other hostname, **only not for root domain**, this resource can be a Load Balancer
+- ALIAS points a hostname to an AWS Resource, works for root and non root domain
