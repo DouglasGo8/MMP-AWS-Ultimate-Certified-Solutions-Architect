@@ -125,6 +125,7 @@
 - Automatic registers news instances when load goes up
 - ALB and ASG works hand in hand ![ALB&ASG](./assets/images/LB_ASG_Rules.png)
 - Scaling Policies
+
   1. Target Tracking Scaling, average ASG CPU to stay at around 40%
 
   2. Simple / Step Scaling, CloudWatch alarm is triggered (CPU>70%), then add 2 units
@@ -135,7 +136,7 @@
 
 ## RDS Aurora and ElastiCache
 
-- Relation Data base Services using SQL composed by *Postgres, MySQL, MariaDB, Oracle, SQL Server Aurora AWS*
+- Relation Data base Services using SQL composed by _Postgres, MySQL, MariaDB, Oracle, SQL Server Aurora AWS_
 - RDS is a managed service
 - Can't access by SSH int your instances
 - Avoid scaling your database storage
@@ -166,8 +167,21 @@
 - Is a managed DNS
 - DNS is a collection of rules and records which helps clients understand how to reach a server through its domain name
 
-- Most common in AWS are *A: hostname to IPv4* - *AAAA: hsostname to IPv6* - *CNAME: hostname to hostname* and *Alias: hostname to AWS resources*
+- Most common in AWS are _A: hostname to IPv4_ - _AAAA: hsostname to IPv6_ - _CNAME: hostname to hostname_ and _Alias: hostname to AWS resources_
 - A preview ![Route 53](./assets/images/route53.png)
 - Advanced features are Load Balancing (throuhg DNS - also called client load balacing), Health checks (although limited) and Routing policy as simple, failover, geolocation, latency, weighted and multi value
 - CNAME points a hostname to any other hostname, **only not for root domain**, this resource can be a Load Balancer
 - ALIAS points a hostname to an AWS Resource, works for root and non root domain
+
+## Classic Solutions Architecture Discussions
+
+- Stateless WebApp - Foo WebApp (No database) ![Only DateTime](./assets/images/Classic_Architecture_Discusson_basic_plan_1.png)
+- Statefull WebApp - Bar WebApp (Session Stickiness and Session Affinity) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_2.png) can use session cookis also (never do this)
+- Statefull WebApp - Bar WebApp (Using Elastic Cache if history of sales is not necessary) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_3.png)
+- Statefull WebApp - Bar WebApp (Using Elastic Cache and AWS RDS - Correct Solution) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_4.png)
+- Scaling fast Pattern ![Scaling Fast]((./assets/images/Classic_Architecture_Discusson_basic_plan_5.png)
+
+## AWS S3
+
+- Allows store objects (files) in buckets
+- The key is the fully path i.e s3://my-bucket/my_folder1/my_file.txt
