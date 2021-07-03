@@ -167,7 +167,7 @@
 - Is a managed DNS
 - DNS is a collection of rules and records which helps clients understand how to reach a server through its domain name
 
-- Most common in AWS are _A: hostname to IPv4_ - _AAAA: hsostname to IPv6_ - _CNAME: hostname to hostname_ and _Alias: hostname to AWS resources_
+- Most common in AWS are _A: hostname to IPv4_ - _AAAA: hostname to IPv6_ - _CNAME: hostname to hostname_ and _Alias: hostname to AWS resources_
 - A preview ![Route 53](./assets/images/route53.png)
 - Advanced features are Load Balancing (throuhg DNS - also called client load balacing), Health checks (although limited) and Routing policy as simple, failover, geolocation, latency, weighted and multi value
 - CNAME points a hostname to any other hostname, **only not for root domain**, this resource can be a Load Balancer
@@ -176,12 +176,51 @@
 ## Classic Solutions Architecture Discussions
 
 - Stateless WebApp - Foo WebApp (No database) ![Only DateTime](./assets/images/Classic_Architecture_Discusson_basic_plan_1.png)
-- Statefull WebApp - Bar WebApp (Session Stickiness and Session Affinity) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_2.png) can use session cookis also (never do this)
-- Statefull WebApp - Bar WebApp (Using Elastic Cache if history of sales is not necessary) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_3.png)
-- Statefull WebApp - Bar WebApp (Using Elastic Cache and AWS RDS - Correct Solution) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_4.png)
+- Stateful WebApp - Bar WebApp (Session Stickiness and Session Affinity) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_2.png) can use session cookis also (never do this)
+- Stateful WebApp - Bar WebApp (Using Elastic Cache if history of sales is not necessary) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_3.png)
+- Stateful WebApp - Bar WebApp (Using Elastic Cache and AWS RDS - Correct Solution) ![Session Stickiness](./assets/images/Classic_Architecture_Discusson_basic_plan_4.png)
 - Scaling fast Pattern ![Scaling Fast]((./assets/images/Classic_Architecture_Discusson_basic_plan_5.png)
 
 ## AWS S3
 
 - Allows store objects (files) in buckets
 - The key is the fully path i.e s3://my-bucket/my_folder1/my_file.txt
+- Have MFA Store
+- Access Logs
+- S3 Cross/Same Region Replication Async
+
+## AWS CloudFront
+
+- Content Delivery Network
+- Improves read performance, content is cached at the edge
+
+## SQS, SNS and Kinesis
+
+### SQS
+
+- SQS, simple queue message supports multiple producers messages, poll messages by multiple consumers
+- Produce to SQS using AWS SDK (SendMessage API), message up to 256kb
+- Consumers receive and process messages in parallel
+- Consumers delete messages after processing them
+- Message visibility timeout ![SQS Message Timeout Visibility](assets/images/SQS_Message_Visibility_timeout.png)
+- DLQ are supported in SQS, must configure a threshold of how many times a message can go back to the queue and after the **MaximumReceives** property is exceed the message goes into a dead letter
+- Supports FIFO pattern (ordering message), but have throughput limited in 300 msg/s without batching
+
+### SNS
+
+- Send one Message to many Subscriber
+
+### Kinesis
+
+- Makes it easy to collect, process and analyze streaming data in real-time
+- Ingestion real-time data as application logs, metrics, website clickstreams etc
+
+### AWS MQ
+
+- Open Source and integrated with on-premise apps with supported protocols MQTT, AMQP, STOMP
+- AWS MQ is managed Apache MQ
+- Don't scale as SQS, it runs on dedicated machine and can run in HA with failover
+
+## ECS, Fargate ECR and EKS
+
+- ECS Elastic Container Service, needs a provision & maintain infrastructure over ec2 instances
