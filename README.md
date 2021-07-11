@@ -2,6 +2,10 @@
 
 ---
 
+## ALL Services
+
+![All Service By Group](assets/images/AWS_All_Services_By_Group.png)
+
 ## AWS Regions
 
 - AWS Global cloud provider with many data centers around the world, e.g us-east-1, eu-west-3, (usually 3, min 2 max 6) / ap-southeast-2a/2b/2c
@@ -169,7 +173,7 @@
 
 - Most common in AWS are _A: hostname to IPv4_ - _AAAA: hostname to IPv6_ - _CNAME: hostname to hostname_ and _Alias: hostname to AWS resources_
 - A preview ![Route 53](./assets/images/route53.png)
-- Advanced features are Load Balancing (throuhg DNS - also called client load balacing), Health checks (although limited) and Routing policy as simple, failover, geolocation, latency, weighted and multi value
+- Advanced features are Load Balancing (throuhg DNS - also called client load balancing), Health checks (although limited) and Routing policy as simple, failover, geo-location, latency, weighted and multi value
 - CNAME points a hostname to any other hostname, **only not for root domain**, this resource can be a Load Balancer
 - ALIAS points a hostname to an AWS Resource, works for root and non root domain
 
@@ -224,3 +228,90 @@
 ## ECS, Fargate ECR and EKS
 
 - ECS Elastic Container Service, needs a provision & maintain infrastructure over ec2 instances
+
+## CloudWatch Metrics
+
+- CloudWatch provides metrics for every services in AWS
+- Can use detailed monitoring if you want to more prompt scale your ASG
+- Can setup quick dashboards to look key metrics
+- Applications can send logs to CloudWatch using that SDK
+- CloudWatch can collect logs from
+  1. Elastic BeansTalk: collection of logs from application
+  2. ECS: collection from containers
+  3. AWS Lambda: collection from function logs
+  4. VPC Flow
+  5. API Gateway
+  6. CloudTrail
+  7. Route53 in DNS Queries
+- CloudWatch logs can use filter expressions, i.e find a specific IP inside log, must have IAM Policy like CloudWatchLogFullAccess ![CloudWatch Agent from EC2](assets/images/CloudWatch_Log_Agent_from_EC2.png)
+- CloudTrail provides governance, compliance and audit from your AWS account, **is enabled by default**, you can get history of events from api call made in aws account to
+  1. Console
+  2. SDK
+  3. CLI
+  4. AWS Services
+  5. Can put logs from CloudTrail into CloudWatch Logs or S3
+  6. Examples of use "If a resource was deleted in AWS, use CloudTrail first!"
+
+## AWS STS (Security Token Service)
+
+- Allows to grant limited and temp access to an AWS resource
+
+## AWS Organizations
+
+- Allows to manage multiple AWS accounts ![Organizations Spitted](assets/images/AWS_Organizations_Splitted.png) - ![Organizations Spitted in Diagram](assets/images/AWS_Organizations_Splitted_Diagram.png)
+
+## AWS Security & Encryption
+
+- Encryption in flight (SSL) data protected online, data encrypted before sending and decrypted after receiving, traditional SSL (HTTPS) to protect from MITM
+- Data Keep encrypted after being received by the server
+
+### AWS KMS
+
+- Easy way to control access to your data, most of time related to KMS
+- Use KMS to database passwords, credentials to external services private key ssl
+
+## WAF
+
+- To protect web app in layer exposed
+
+## Networking VPC
+
+- Virtual Private Cloud
+- We can have multiple VPCs in a region (max 5 per region)
+
+![MainPic](assets/images/AWS_VPC_Full.png)
+
+### CIDR - IPV4 to Public and Private IPs
+
+- CIDR are used for Security Groups rules, or AWS networking in general
+- The helps to define IP address range
+- Have two components as base IP and Subnet Mask
+- [IP Address Guide](https://www.ipaddressguide.com/cidr)
+
+### VPC Walkthrough
+
+- All new account have a default VPC
+- News instances are launched into VPC if no subnet is specified
+- Default VPC **have internet connectivity and all instances have a public IP**
+- Public and a private DNS name
+
+### Subnets
+
+- Available in multiple Zones as Private and Public
+
+### Internet Gateway
+
+- Internet Gateway helps our VPCs instance connect to the Internet
+- It scales horizontally and is HA and redundant
+- Must be created separately from VPC
+- One VPC can **only** be attached to one IGW and vice versa
+- Internet Gateway is also a NAT for the instances that have a public IPV4
+- IGW on their own dot not allow internet access, route table must be edited ![IGW and Route Table](assets/images/IGW_SG_RouteTable.png)
+
+### Nat Instances (Outdated)
+
+- Allows instances in the private subnets to connect to the internet
+- Must be launched in a public subnet
+- Must have a Elastic UP attached to it
+
+### Nat Gateways
