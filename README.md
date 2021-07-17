@@ -314,6 +314,7 @@
 - Must be launched in a public subnet
 - Must have a Elastic UP attached to it
 
+<<<<<<< HEAD
 ### White papers and Architectures
 
 - Stop guest about your capacity
@@ -333,3 +334,36 @@
 - Performance Efficiency
   1. Use computing with resources efficiently
   2. Use serverless architectures
+=======
+### Nat Gateways
+
+- AWS managed Gateway, higher bandwidth, better availability no admin
+- Pay by the hour for usage and bandwidth
+- NATg is create in a specific AZ and uses EIP (Elastic IP)
+- Cannot used by a instance and require a IGW (Private Subnet ->  NAT -> IGW)
+- No security group is require to manage it
+- For high availability you need create multiple AZs Gateway for fault-tolerance, ![NAT Gateway](assets/images/NAT_GATEWAY.png)
+
+### DNS Resolution in VPC
+
+- enabledDnsSupport/enableDsnHostName must be enabled to create hostname in Route53
+
+### Network NACLs and Security Groups
+
+- NACL Rules -> SG Inbound Rules from external access
+- NACL are like firewall which control the traffic from and to subnet
+- Default allows everything outbound and everything inbound
+- One NACL per subnet, new subnets are assigned the Default NACL
+
+### VPC Peering
+
+- Connect two VPC, privately using AWS network without overlapping CIDR
+
+### VPC Endpoints
+
+- Avoid all traffic from NATg from private network to connect in AWS Services, it allow connect to AWS Services using private network instead of public www network
+- They scale horizontally and are redundant and remove the need of IGW, NAT etc
+- It is a Interface ENI (private IP address) or Gateway to provision a target and must be used in a route table
+
+### Flow Logs
+>>>>>>> d27f3c1c86b24c492787d1e5554690529828e71c
