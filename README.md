@@ -314,4 +314,22 @@
 - Must be launched in a public subnet
 - Must have a Elastic UP attached to it
 
-### Nat Gateways
+### White papers and Architectures
+
+- Stop guest about your capacity
+- Test system at production scale
+- Automate to make your architecture easy
+- Use Well Architected practices
+- Operation Excellence
+  1. Run and monitor systems
+  2. Perform infra as a code
+- Security
+  1. Ability to protect your information, systems, and assets
+  2. Enable traceability
+  3. Strong identity foundation
+  4. Apply security in all layers
+  5. Protected data in transit and at rest with Encryption token and access control
+  6. Keep people away from data
+- Performance Efficiency
+  1. Use computing with resources efficiently
+  2. Use serverless architectures
